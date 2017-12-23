@@ -51,6 +51,22 @@ class TestPlaylist(unittest.TestCase):
         self.assertEqual(len(cleaned_playlist), 8)
 
 
+    def test_format_method_returns_nicely_formatted_elements(self):
+        formatted_playlist = Playlist.format(self.cleaned_results)
+        expected_playlist = [
+            { "time": "20:56:51", "artist_album": "P-Sol - Mixed Bag, Vol. 3", "track_title": "If You Let Me (Nu Disco;Re-Edits)" },
+            { "time": "20:52:08", "artist_album": "Sinkane - Life & Livin' It", "track_title": "Favorite Song" },
+            { "time": "20:47:02", "artist_album": "Ryo Kawasaki", "track_title": "Dreams For Radha" },
+            { "time": "20:41:00", "artist_album": "4th Sign - Eloge De La Lenteur Part 2", "track_title": "02-No Trouble No Men (House)" },
+            { "time": "20:35:25", "artist_album": "Free Radicals -  ", "track_title": "I Just Can't Turn It Loose (Je (House)" },
+            { "time": "20:30:41", "artist_album": "DORSIA - Ghana", "track_title": "Ghana (HNNY remix) (Deep house)" },
+            { "time": "20:27:02", "artist_album": "Fake title containing Jingle", "track_title": "So fake" },
+            { "time": "20:22:45", "artist_album": "Fake title containing ...", "track_title": "So fake" },
+        ]
+
+        self.assertListEqual(expected_playlist, formatted_playlist)
+
+
     def setUp(self):
         self.results = BeautifulSoup("""
 <!--<html>
@@ -72,6 +88,20 @@ class TestPlaylist(unittest.TestCase):
 <!--</body>
 </html>
 -->"""
+            , "html.parser"
+        ).select("td.Cell")
+
+        self.cleaned_results = BeautifulSoup(
+"""
+<td class='Cell'>20:56:51<br>P-Sol - Mixed Bag, Vol. 3<br/>If You Let Me (Nu Disco;Re-Edits)</td>
+<td class='Cell'>20:52:08<br>Sinkane - Life & Livin' It<br/>Favorite Song</td>
+<td class='Cell'>20:47:02<br>Ryo Kawasaki<br/>Dreams For Radha</td>
+<td class='Cell'>20:41:00<br>4th Sign - Eloge De La Lenteur Part 2<br/>02-No Trouble No Men (House)</td>
+<td class='Cell'>20:35:25<br>Free Radicals -  <br/>I Just Can't Turn It Loose (Je (House)</td>
+<td class='Cell'>20:30:41<br>DORSIA - Ghana<br/>Ghana (HNNY remix) (Deep house)</td>
+<td class='Cell'>20:27:02<br>Fake title containing Jingle<br/>So fake</td>
+<td class='Cell'>20:22:45<br>Fake title containing ...<br/>So fake</td>
+"""
             , "html.parser"
         ).select("td.Cell")
 
