@@ -13,7 +13,7 @@ class Playlist():
 
     @staticmethod
     def __is_legit_track_title(element):
-        not_current = not re.compile("^(\.\.\.)").search(element.text)
+        not_upcoming = not re.compile("^(\.\.\.)").search(element.text)
         not_jingle = not re.compile("\(Jingle\)").search(element.text)
 
-        return not_current and not_jingle
+        return not_upcoming and not_jingle

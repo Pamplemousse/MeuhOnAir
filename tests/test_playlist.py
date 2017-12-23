@@ -15,14 +15,14 @@ class TestPlaylist(unittest.TestCase):
         self.assertTrue(str(jingle) != str(cleaned_playlist[2]))
 
 
-    def test_clean_method_remove_currently_played_title(self):
+    def test_clean_method_remove_upcoming_title(self):
         cleaned_playlist = Playlist.clean(self.results)
-        current_title = BeautifulSoup(
+        upcoming_title = BeautifulSoup(
             "<td class='Cell'>...<br>El Michels Affair - Return to the 37th Chamber<br/>Verbal Intercourse (R&B)</td>",
             "html.parser"
         )
 
-        self.assertTrue(str(current_title) != str(cleaned_playlist[0]))
+        self.assertTrue(str(upcoming_title) != str(cleaned_playlist[0]))
 
 
     def test_clean_method_keeps_titles_containing_ellipsis(self):
