@@ -21,7 +21,28 @@ class TestPlaylist(unittest.TestCase):
             "<td class='Cell'>...<br>El Michels Affair - Return to the 37th Chamber<br/>Verbal Intercourse (R&B)</td>",
             "html.parser"
         )
+
         self.assertTrue(str(current_title) != str(cleaned_playlist[0]))
+
+
+    def test_clean_method_keeps_titles_containing_ellipsis(self):
+        cleaned_playlist = Playlist.clean(self.results)
+        ellipsis_title = BeautifulSoup(
+            "<td class='Cell'>20:22:45<br>Fake title containing ...<br/>So fake</td>",
+            "html.parser"
+        )
+
+        self.assertTrue(str(ellipsis_title) == str(cleaned_playlist[-1]))
+
+
+    def test_clean_method_keeps_titles_containing_jingle(self):
+        cleaned_playlist = Playlist.clean(self.results)
+        jingle_title = BeautifulSoup(
+            "<td class='Cell'>20:27:02<br>Fake title containing Jingle<br/>So fake</td>",
+            "html.parser"
+        )
+
+        self.assertTrue(str(jingle_title) == str(cleaned_playlist[-2]))
 
 
     def test_clean_method_returns_rest_of_titles(self):
@@ -45,8 +66,8 @@ class TestPlaylist(unittest.TestCase):
 <tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:41:00<br>4th Sign - Eloge De La Lenteur Part 2<br/>02-No Trouble No Men (House)</td></tr>
 <tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:35:25<br>Free Radicals -  <br/>I Just Can't Turn It Loose (Je (House)</td></tr>
 <tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:30:41<br>DORSIA - Ghana<br/>Ghana (HNNY remix) (Deep house)</td></tr>
-<tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:27:02<br>Todd Terje & The Olsens<br/>Baby Do You Wanna Bump (Daniel Maloso radio edit)</td></tr>
-<tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:22:45<br>Metronomy - Summer 08<br/>Old Skool</td></tr>
+<tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:27:02<br>Fake title containing Jingle<br/>So fake</td></tr>
+<tr><td class='pochette'>&nbsp;</td><td class='Cell'>20:22:45<br>Fake title containing ...<br/>So fake</td></tr>
 </table>
 <!--</body>
 </html>
