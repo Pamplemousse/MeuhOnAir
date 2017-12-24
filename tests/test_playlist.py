@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from playlist import Playlist
+import playlist as Playlist
 
 import unittest
 
