@@ -15,10 +15,12 @@ def main():
     titles = Playlist.clean(results)
     formatted_titles = Playlist.format(titles)
 
-    known_titles = list(map(
-        pickle.loads,
-        r.lrange("playlist", 0, -1),
-    ))
+    known_titles = []
+    if r.exists("playlist"):
+        known_titles = list(map(
+            pickle.loads,
+            r.lrange("playlist", 0, -1),
+        ))
 
     unknown_titles = list(filter(
         lambda title: title not in known_titles,
