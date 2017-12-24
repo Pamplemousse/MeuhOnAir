@@ -1,12 +1,14 @@
 import os
 
 
-python_env          = os.environ.get("PYTHON_ENV") or "development"
-
 access_token        = os.environ.get("ACCESS_TOKEN")
 access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET")
 consumer_key        = os.environ.get("CONSUMER_KEY")
 consumer_secret     = os.environ.get("CONSUMER_SECRET")
+
+python_env          = os.environ.get("PYTHON_ENV") or "development"
+
+redis_host          = os.environ.get("REDIS_URL") or "meuh-redis"
 
 
 if (access_token == None
