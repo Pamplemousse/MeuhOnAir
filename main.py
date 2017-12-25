@@ -1,4 +1,4 @@
-import pickle, redis
+import datetime, pickle, redis
 
 import environment as Env
 import playlist as Playlist
@@ -11,6 +11,8 @@ r = redis.from_url(url=url, db=0)
 
 
 def main():
+    today = datetime.date.today()
+
     results = Scrapper.getTracks()
     titles = Playlist.clean(results)
     formatted_titles = Playlist.format(titles)
@@ -29,9 +31,14 @@ def main():
 
     for title in unknown_titles:
         r.lpush("playlist", pickle.dumps(title))
-        message = "{}\n{}\n{}".format(title["time"],
-                                      title["artist_album"],
-                                      title["track_title"])
+
+        message = "{} ({}/{})\n{}\n{}".format(
+            title["time"],
+            today.day,
+            today.month,
+            title["artist_album"],
+            title["track_title"]
+        )
         Tweeter.tweet(message)
 
     r.ltrim("playlist", 0, 49)
