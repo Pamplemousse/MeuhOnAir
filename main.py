@@ -6,8 +6,9 @@ import scrapper as Scrapper
 import tweeter as Tweeter
 
 
-host = Environment.redis_host
-r = redis.StrictRedis(host=host, port=6379, db=0)
+url = Environment.redis_url
+
+r = redis.from_url(url=url, db=0)
 
 
 def main():

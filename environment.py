@@ -8,7 +8,7 @@ consumer_secret     = os.environ.get("CONSUMER_SECRET")
 
 python_env          = os.environ.get("PYTHON_ENV") or "development"
 
-redis_host          = os.environ.get("REDIS_URL") or "meuh-redis"
+redis_url           = os.environ.get("REDIS_URL") or "redis://@meuh-redis:6379"
 
 
 if (access_token == None
