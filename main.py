@@ -1,13 +1,12 @@
 import pickle, redis
 
-import environment as Environment
+import environment as Env
 import playlist as Playlist
 import scrapper as Scrapper
 import tweeter as Tweeter
 
 
-url = Environment.redis_url
-
+url = Env.redis_url
 r = redis.from_url(url=url, db=0)
 
 
