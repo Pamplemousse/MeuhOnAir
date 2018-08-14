@@ -3,7 +3,7 @@ import datetime, pickle, redis
 import environment as Env
 import playlist as Playlist
 import scrapper as Scrapper
-import tweeter as Tweeter
+import tooter as Tooter
 
 
 url = Env.redis_url
@@ -39,7 +39,7 @@ def main():
             title["artist_album"],
             title["track_title"]
         )
-        Tweeter.tweet(message)
+        Tooter.toot(message)
 
     r.ltrim("playlist", 0, 49)
 
