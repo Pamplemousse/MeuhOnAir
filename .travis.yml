@@ -9,3 +9,4 @@ install:
 
 script:
   - flake8 *.py
+  - python -m unittest tests/test_*.py
