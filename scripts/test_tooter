@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+import tooter as Tooter
+
+message = 'Hello World'
+Tooter.toot(message)

@@ -1,0 +1,7 @@
+import redis
+import environment as Env
+
+url = Env.redis_url
+r = redis.from_url(url=url, db=0)
+
+r.delete("playlist")
