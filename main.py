@@ -1,4 +1,6 @@
-import datetime, pickle, redis
+import datetime
+import pickle
+import redis
 
 import environment as Env
 import playlist as Playlist
